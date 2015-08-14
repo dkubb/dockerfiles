@@ -1,0 +1,22 @@
+--- nix-1.9.orig/Makefile
++++ nix-1.9/Makefile
+@@ -21,7 +21,6 @@
+   misc/launchd/local.mk \
+   misc/upstart/local.mk \
+   misc/emacs/local.mk \
+-  doc/manual/local.mk \
+   tests/local.mk
+
+ GLOBAL_CXXFLAGS += -std=c++0x -g -Wall
+--- nix-1.9.orig/src/libutil/affinity.cc
++++ nix-1.9/src/libutil/affinity.cc
+@@ -1,6 +1,9 @@
+ #include "types.hh"
+ #include "util.hh"
+ #include "affinity.hh"
++#include <string.h>
++
++#undef HAVE_SCHED_SETAFFINITY
+
+ #if HAVE_SCHED_H
+ #include <sched.h>

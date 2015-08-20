@@ -1,4 +1,4 @@
-# system dependencies
+# system runtime dependencies
 alpine-base       = 3.2.3-r0
 alpine-baselayout = 2.3.2-r0
 alpine-conf       = 3.2.1-r6
@@ -9,10 +9,10 @@ musl              = 1.1.9-r5
 musl-utils        = 1.1.9-r5
 openrc            = 0.15.1-r3
 
-# dockerfile dependencies
+# dockerfile build dependencies
 curl              = 7.42.1-r0
 
-# nix dependencies
+# nix build dependencies
 autoconf          = 2.69-r0
 automake          = 1.15-r0
 bash              = 4.3.33-r0

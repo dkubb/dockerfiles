@@ -48,5 +48,12 @@ RUN mkdir -p -m 1755 /nix/store/trash \
   && nix-channel --update \
   && ln -s /nix/var/nix/profiles/default /root/.nix-profile
 
+# TODO: install musl-gcc using nix
+#   * Make sure it links against musl as the libc instead of glibc
+#   * Remove alpine linux system gcc and other nix build dependencies
+
+# TODO: figure out if it's possible to change the nix global settings to
+# prefer musl-gcc instead of gcc + glibc
+
 ENTRYPOINT ["/bin/bash", "--login", "-c"]
 CMD ["bash"]

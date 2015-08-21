@@ -10,11 +10,6 @@ ENV NIX_SHA256  8a47cd7c35dfa628a4acfaef387e7451013c61d250bbcf1f38067a7c73f9f3e1
 COPY apk-packages /tmp/
 RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages | tr -d ' ' | xargs apk add --update-cache
 
-ENV CC       x86_64-alpine-linux-musl-gcc
-ENV CXX      x86_64-alpine-linux-musl-g++
-ENV CFLAGS   -static
-ENV CXXFLAGS -static
-
 # Install WWW::Curl perl module (until perl-www-curl package is available)
 RUN perl -MCPAN -e 'install WWW::Curl'
 
@@ -22,7 +17,8 @@ RUN perl -MCPAN -e 'install WWW::Curl'
 COPY nix.patch /tmp/
 
 # Install nix from source
-RUN cd /tmp \
+RUN export CC=x86_64-alpine-linux-musl-gcc CXX=x86_64-alpine-linux-musl-g++ CFLAGS=-static CXXFLAGS=-static \
+  && cd /tmp \
   && curl --remote-name "https://nixos.org/releases/nix/latest/nix-$NIX_VERSION.tar.xz" \
   && echo "$NIX_SHA256  nix-$NIX_VERSION.tar.xz" | shasum --algorithm 256 --check \
   && tar xJf "nix-$NIX_VERSION.tar.xz" \

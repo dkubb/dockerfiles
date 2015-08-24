@@ -11,7 +11,7 @@ COPY apk-packages /tmp/
 RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages | tr -d ' ' | xargs apk add --update-cache
 
 # Install WWW::Curl perl module (until perl-www-curl package is available)
-RUN perl -MCPAN -e 'install WWW::Curl'
+RUN cpan WWW::Curl
 
 # Add patch to fix build errors
 COPY nix.patch /tmp/

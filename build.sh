@@ -8,5 +8,5 @@ readonly IMAGES=(
 )
 
 for image in "${IMAGES[@]}"; do
-  (cd "$image"; docker build --tag "dkubb/$image" .)
+  (cd "$(dirname "$0")/$image"; docker build --tag "dkubb/$image" .)
 done

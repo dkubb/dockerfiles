@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -o errexit -o pipefail -o noglob -o noclobber -o nounset
+IFS=$'\n\t'
+
+cd /opt/rails
+eval "$(ruby -r yaml -e 'puts YAML.load_file("Procfile").fetch("web")')"

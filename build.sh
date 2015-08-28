@@ -5,6 +5,7 @@ IFS=$'\n\t'
 
 readonly IMAGES=(
   alpine-nix
+  alpine-nix-rails-nginx
 )
 
 for image in "${IMAGES[@]}"; do

@@ -51,5 +51,8 @@ RUN mkdir -p -m 1755 /nix/store/trash \
 # TODO: figure out if it's possible to change the nix global settings to
 # prefer musl-gcc instead of gcc + glibc
 
+# Add utility scripts
+COPY setup-directories.sh /root/
+
 ENTRYPOINT ["/bin/bash", "--login", "-c"]
 CMD ["bash"]

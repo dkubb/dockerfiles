@@ -28,6 +28,7 @@ RUN export CC=x86_64-alpine-linux-musl-gcc CXX=x86_64-alpine-linux-musl-g++ CFLA
   && ./configure --sysconfdir=/etc --enable-gc \
   && make \
   && make install \
+  && sed -i '/^\s*export MANPATH=/d' /etc/profile.d/nix.sh \
   && rm -r /tmp/*
 
 # Create dummy user and group for nix

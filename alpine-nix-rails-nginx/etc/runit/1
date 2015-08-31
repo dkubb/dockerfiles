@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-source /etc/profile.d/nix.sh
-
 set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
+
+source /etc/profile.d/nix.sh
 
 # Setup acl to allow nginx user read-only access to socket and public content
 setfacl --modify u:nginx:rX -- /opt /opt/rails /var/run/rails

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source /etc/profile.d/nix.sh
-
 set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
+
+source /etc/profile.d/nix.sh
 
 exec /nix/var/nix/profiles/default/bin/runsvdir -P /etc/service

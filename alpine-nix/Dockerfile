@@ -28,6 +28,7 @@ RUN export CC=x86_64-alpine-linux-musl-gcc CXX=x86_64-alpine-linux-musl-g++ CFLA
   && ./configure --sysconfdir=/etc --enable-gc \
   && make \
   && make install \
+  && sed -i '/^\s*export MANPATH=/d' /etc/profile.d/nix.sh \
   && rm -r /tmp/*
 
 # Create dummy user and group for nix
@@ -50,6 +51,9 @@ RUN mkdir -p -m 1755 /nix/store/trash \
 
 # TODO: figure out if it's possible to change the nix global settings to
 # prefer musl-gcc instead of gcc + glibc
+
+# Add utility scripts
+COPY setup-directories.sh /root/
 
 ENTRYPOINT ["/bin/bash", "--login", "-c"]
 CMD ["bash"]

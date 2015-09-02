@@ -45,9 +45,12 @@ RUN mkdir -m 1750 -- /opt \
 WORKDIR /opt/rails
 
 # Setup bundler system library dependencies
+USER rails
 RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.nokogiri '--use-system-libraries --with-xml2-include=/nix/var/nix/profiles/default/include/libxml2 --with-xml2-dir=/nix/var/nix/profiles/default --with-xslt-dir=/nix/var/nix/profiles/default' \
   && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
+
+USER root
 
 # Set the entrypoint for children docker images
 ENTRYPOINT ["/nix/var/nix/profiles/default/bin/runit"]

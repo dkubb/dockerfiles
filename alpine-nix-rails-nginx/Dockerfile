@@ -3,8 +3,6 @@
 FROM dkubb/alpine-nix:latest
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-EXPOSE 80
-
 # Configure nix
 COPY config.nix /root/.nixpkgs/config.nix
 
@@ -51,6 +49,8 @@ RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
 
 USER root
+
+EXPOSE 8080
 
 # Set the entrypoint for children docker images
 ENTRYPOINT ["/nix/var/nix/profiles/default/bin/runit"]

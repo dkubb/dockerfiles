@@ -13,7 +13,7 @@ RUN nix-env --install \
     acl-2.2.52 \
     bundler-1.10.5 \
     gcc-wrapper-5.2.0 \
-    git-2.5.0 \
+    git-2.5.1 \
     gnumake-4.1 \
     libressl-2.2.2 \
     libxml2-2.9.2 \

@@ -3,8 +3,6 @@
 FROM dkubb/alpine-nix:latest
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-EXPOSE 80
-
 # Configure nix
 COPY config.nix /root/.nixpkgs/config.nix
 
@@ -13,7 +11,7 @@ RUN nix-env --install \
     acl-2.2.52 \
     bundler-1.10.5 \
     gcc-wrapper-5.2.0 \
-    git-2.5.0 \
+    git-2.5.1 \
     gnumake-4.1 \
     libressl-2.2.2 \
     libxml2-2.9.2 \
@@ -36,7 +34,7 @@ COPY etc /etc/
 RUN mkdir -m 1750 -- /opt \
   && chown root:nogroup -- /opt \
   && /root/setup-directories.sh root /etc/runit /etc/sv /etc/service /etc/service/nginx /etc/service/rails \
-  && /root/setup-directories.sh nginx /etc/nginx /var/cache/nginx /var/cache/nginx/tmp \
+  && /root/setup-directories.sh nginx /etc/nginx /var/run/nginx /var/cache/nginx /var/log/nginx \
   && /root/setup-directories.sh rails /opt/rails /var/run/rails \
   && ln -s -- /etc/sv/nginx /etc/service/nginx/run \
   && ln -s -- /etc/sv/rails /etc/service/rails/run \
@@ -45,9 +43,14 @@ RUN mkdir -m 1750 -- /opt \
 WORKDIR /opt/rails
 
 # Setup bundler system library dependencies
+USER rails
 RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.nokogiri '--use-system-libraries --with-xml2-include=/nix/var/nix/profiles/default/include/libxml2 --with-xml2-dir=/nix/var/nix/profiles/default --with-xslt-dir=/nix/var/nix/profiles/default' \
   && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
+
+USER root
+
+EXPOSE 8080
 
 # Set the entrypoint for children docker images
 ENTRYPOINT ["/nix/var/nix/profiles/default/bin/runit"]

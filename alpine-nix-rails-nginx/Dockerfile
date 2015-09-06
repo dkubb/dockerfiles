@@ -18,6 +18,7 @@ RUN nix-env --install \
     libxslt-1.1.28 \
     nginx-1.9.4 \
     nodejs-0.12.7 \
+    postgresql-9.4.4 \
     ruby-2.2.2-p0 \
     runit-2.1.2 \
     zlib-1.2.8 \
@@ -46,6 +47,7 @@ WORKDIR /opt/rails
 USER rails
 RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.nokogiri '--use-system-libraries --with-xml2-include=/nix/var/nix/profiles/default/include/libxml2 --with-xml2-dir=/nix/var/nix/profiles/default --with-xslt-dir=/nix/var/nix/profiles/default' \
+  && bundle config --local build.pg '--use-system-libraries --with-zlib-dir=/nix/var/nix/profiles/default' \
   && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
 
 USER root

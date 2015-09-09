@@ -9,7 +9,7 @@ readonly IMAGES=(
   alpine-nix-rails-nginx/example
 )
 
-(cd alpine-nix-rails-nginx && rails new example --template example-rails-template.rb --force)
+(cd alpine-nix-rails-nginx && rails new example --template example-rails-template.rb --database postgresql --force)
 
 for image in "${IMAGES[@]}"; do
   (cd "$(dirname "$0")/$image" && docker build --tag "dkubb/$image" .)

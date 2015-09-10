@@ -68,7 +68,7 @@ USER root
 
 COPY Gemfile* /opt/rails/
 RUN source /etc/profile.d/nix.sh \
-  && until timeout -t 180 bundle --deployment --jobs 8 --without development test; do :; done
+  && until timeout -t 180 bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \

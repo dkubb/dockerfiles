@@ -48,7 +48,11 @@ USER rails
 RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.nokogiri '--use-system-libraries --with-xml2-include=/nix/var/nix/profiles/default/include/libxml2 --with-xml2-dir=/nix/var/nix/profiles/default --with-xslt-dir=/nix/var/nix/profiles/default' \
   && bundle config --local build.pg '--use-system-libraries --with-zlib-dir=/nix/var/nix/profiles/default' \
-  && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
+  && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default' \
+  && bundle config --local frozen 'true' \
+  && bundle config --local jobs '8' \
+  && bundle config --local path 'vendor/bundle' \
+  && bundle config --local without 'development test'
 
 USER root
 

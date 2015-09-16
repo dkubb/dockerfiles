@@ -9,9 +9,9 @@ COPY config.nix /root/.nixpkgs/config.nix
 # Install system dependencies
 RUN nix-env --install \
     acl-2.2.52 \
-    bundler-1.10.5 \
+    bundler-1.10.6 \
     gcc-wrapper-5.2.0 \
-    git-2.5.1 \
+    git-2.5.2 \
     gnumake-4.1 \
     libressl-2.2.2 \
     libxml2-2.9.2 \

@@ -5,8 +5,8 @@ alpine-conf       = 3.2.1-r6
 apk-tools         = 2.6.3-r0
 libcrypto1.0      = 1.0.2d-r0
 libssl1.0         = 1.0.2d-r0
-musl              = 1.1.9-r5
-musl-utils        = 1.1.9-r5
+musl              = 1.1.11-r2
+musl-utils        = 1.1.11-r2
 openrc            = 0.15.1-r3
 
 # dockerfile build dependencies

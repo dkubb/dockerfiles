@@ -3,8 +3,8 @@
 FROM alpine:3.2
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-ENV NIX_VERSION 1.9
-ENV NIX_SHA256  8a47cd7c35dfa628a4acfaef387e7451013c61d250bbcf1f38067a7c73f9f3e1
+ENV NIX_VERSION 1.10
+ENV NIX_SHA256  5612ca7a549dd1ee20b208123e041aaa95a414a0e8f650ea88c672dc023d10f6
 
 # Upgrade installed system dependencies
 COPY apk-packages /tmp/

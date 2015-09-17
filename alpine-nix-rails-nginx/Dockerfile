@@ -9,9 +9,9 @@ COPY config.nix /root/.nixpkgs/config.nix
 # Install system dependencies
 RUN nix-env --install \
     acl-2.2.52 \
-    bundler-1.10.5 \
+    bundler-1.10.6 \
     gcc-wrapper-5.2.0 \
-    git-2.5.1 \
+    git-2.5.2 \
     gnumake-4.1 \
     libressl-2.2.2 \
     libxml2-2.9.2 \
@@ -48,7 +48,11 @@ USER rails
 RUN source /etc/profile.d/nix.sh \
   && bundle config --local build.nokogiri '--use-system-libraries --with-xml2-include=/nix/var/nix/profiles/default/include/libxml2 --with-xml2-dir=/nix/var/nix/profiles/default --with-xslt-dir=/nix/var/nix/profiles/default' \
   && bundle config --local build.pg '--use-system-libraries --with-zlib-dir=/nix/var/nix/profiles/default' \
-  && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default'
+  && bundle config --local build.puma '--use-system-libraries --with-opt-dir=/nix/var/nix/profiles/default' \
+  && bundle config --local frozen 'true' \
+  && bundle config --local jobs '8' \
+  && bundle config --local path 'vendor/bundle' \
+  && bundle config --local without 'development test'
 
 USER root
 

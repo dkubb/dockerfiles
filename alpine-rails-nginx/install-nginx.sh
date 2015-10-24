@@ -43,7 +43,6 @@ sed -i 's/\("<hr><center>nginx<\/center>" CRLF\)/\/* \1 *\//' -- src/http/ngx_ht
   --error-log-path=/var/log/nginx/error.log \
   --http-log-path=/var/log/nginx/access.log \
   --http-client-body-temp-path=/var/cache/nginx/client_body_temp \
-  --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
   --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
   --user=nginx \
   --group=nginx \

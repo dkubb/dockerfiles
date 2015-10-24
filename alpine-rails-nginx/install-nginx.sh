@@ -5,7 +5,6 @@ IFS=$'\n\t'
 
 NGINX_HEADERS_MORE_VERSION=0.261
 NGINX_VERSION=1.9.5
-LIBRESSL_VERSION=2.2.4
 
 function verified_curl {
   url="$1"
@@ -29,11 +28,6 @@ verified_curl \
   "headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION.tar.gz" \
   '03d1f5fbecba8565f247d87a38f5e4b6440b0a56d752bdd2b29af2f1c4aea480'
 
-verified_curl \
-  "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-$LIBRESSL_VERSION.tar.gz" \
-  "libressl-$LIBRESSL_VERSION.tar.gz" \
-  "6b409859be8654afc3862549494e097017e64c8d167f12584383586306ef9a7e"
-
 cd nginx-$NGINX_VERSION
 
 # Remove server name from error pages
@@ -54,12 +48,9 @@ sed -i 's/\("<hr><center>nginx<\/center>" CRLF\)/\/* \1 *\//' -- src/http/ngx_ht
   --user=nginx \
   --group=nginx \
   --add-module=/usr/local/src/headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION \
-  --with-openssl=/usr/local/src/libressl-$LIBRESSL_VERSION \
   --with-http_gzip_static_module \
   --with-http_realip_module \
-  --with-http_ssl_module \
   --with-http_stub_status_module \
-  --with-http_v2_module \
   --with-ipv6 \
   --without-http_auth_basic_module \
   --without-http_autoindex_module \

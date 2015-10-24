@@ -45,8 +45,8 @@ ENV PGDATA    /var/lib/postgresql/data
 RUN apk add postgresql=9.4.4-r0
 
 COPY config/postgres.sh /etc/sv/postgres
-RUN /root/setup-directories.sh root /etc/sv /etc/service/postgres \
-  && /root/setup-directories.sh postgres "$(dirname "$PGDATA")" "$PGDATA" \
+RUN  /root/setup-directories.sh root     r  /etc/service/postgres \
+  && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
 
@@ -71,6 +71,7 @@ RUN until timeout -t 180 bundle; do :; done
 COPY . /opt/rails
 RUN mkdir /opt/nginx \
   && mv /opt/rails/public /opt/nginx/html \
-  && /root/setup-directories.sh nginx /opt/nginx \
-  && /root/setup-directories.sh rails /opt/rails
+  && /root/setup-directories.sh nginx r  /opt/nginx \
+  && /root/setup-directories.sh rails r  /opt/rails \
+  && /root/setup-directories.sh rails rw /opt/rails/log
 DOCKERFILE

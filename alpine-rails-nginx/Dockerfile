@@ -28,9 +28,10 @@ COPY etc /etc/
 # Create system directories and service symlinks
 RUN mkdir -m 1750 -- /opt \
   && chown root:nogroup -- /opt \
-  && /root/setup-directories.sh root /etc/runit /etc/sv /etc/service /etc/service/nginx /etc/service/rails \
-  && /root/setup-directories.sh nginx /etc/nginx /var/run/nginx /var/cache/nginx /var/log/nginx \
-  && /root/setup-directories.sh rails /opt/rails /var/run/rails \
+  && /root/setup-directories.sh root  r  /etc/runit /etc/sv /etc/service /etc/service/nginx /etc/service/rails \
+  && /root/setup-directories.sh nginx r  /etc/nginx \
+  && /root/setup-directories.sh nginx rw /var/run/nginx /var/cache/nginx /var/log/nginx \
+  && /root/setup-directories.sh rails rw /opt/rails /var/run/rails \
   && ln -s -- /etc/sv/nginx /etc/service/nginx/run \
   && ln -s -- /etc/sv/rails /etc/service/rails/run \
   && ln -s -- /etc/service /service

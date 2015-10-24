@@ -16,7 +16,8 @@ RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
 
 # Install nginx
 COPY install-nginx.sh /tmp/
-RUN /tmp/install-nginx.sh
+RUN /tmp/install-nginx.sh \
+  && rm -rf /usr/local/src
 
 # Add utility scripts
 COPY setup-directories.sh /root/

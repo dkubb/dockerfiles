@@ -2,8 +2,8 @@
 alpine-baselayout   = 2.3.2-r2
 alpine-conf         = 3.2.1-r7
 busybox-initscripts = 2.3-r1
-musl                = 1.1.12-r0
-musl-utils          = 1.1.12-r0
+musl                = 1.1.12-r1
+musl-utils          = 1.1.12-r1
 
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3

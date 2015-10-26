@@ -73,5 +73,5 @@ RUN mkdir /opt/nginx \
   && mv /opt/rails/public /opt/nginx/html \
   && /root/setup-directories.sh nginx r  /opt/nginx \
   && /root/setup-directories.sh rails r  /opt/rails \
-  && /root/setup-directories.sh rails rw /opt/rails/log
+  && /root/setup-directories.sh rails rw /opt/rails/log /opt/rails/tmp
 DOCKERFILE

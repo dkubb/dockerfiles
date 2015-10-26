@@ -22,7 +22,6 @@ nodejs              = 4.2.1-r0
 postgresql-dev      = 9.4.4-r0
 ruby                = 2.2.3-r0
 ruby-bigdecimal     = 2.2.3-r0
-ruby-bundler        = 1.10.5-r0
 ruby-dev            = 2.2.3-r0
 ruby-io-console     = 2.2.3-r0
 ruby-irb            = 2.2.3-r0

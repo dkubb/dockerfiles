@@ -16,6 +16,7 @@ pcre-dev            = 8.37-r2
 
 # service runtime dependencies
 acl                 = 2.2.52-r2
+libffi-dev          = 3.2.1-r1
 libxml2-dev         = 2.9.2-r2
 libxslt-dev         = 1.1.28-r1
 nodejs              = 4.2.1-r0

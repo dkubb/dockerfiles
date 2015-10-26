@@ -3,8 +3,10 @@
 set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
 
-NGINX_HEADERS_MORE_VERSION=0.261
 NGINX_VERSION=1.9.5
+NGINX_HASH=48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b
+NGINX_HEADERS_MORE_VERSION=0.261
+NGINX_HEADERS_MORE_HASH=03d1f5fbecba8565f247d87a38f5e4b6440b0a56d752bdd2b29af2f1c4aea480
 
 function verified_curl {
   url="$1"
@@ -21,12 +23,12 @@ cd /usr/local/src
 verified_curl \
   "http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" \
   "nginx-$NGINX_VERSION.tar.gz" \
-  '48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b'
+  "$NGINX_HASH"
 
 verified_curl \
   "https://github.com/openresty/headers-more-nginx-module/archive/v$NGINX_HEADERS_MORE_VERSION.tar.gz" \
   "headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION.tar.gz" \
-  '03d1f5fbecba8565f247d87a38f5e4b6440b0a56d752bdd2b29af2f1c4aea480'
+  "$NGINX_HEADERS_MORE_HASH"
 
 cd nginx-$NGINX_VERSION
 

@@ -33,7 +33,7 @@ verified_curl \
 cd nginx-$NGINX_VERSION
 
 # Remove server name from error pages
-sed -i 's/\("<hr><center>nginx<\/center>" CRLF\)/\/* \1 *\//' -- src/http/ngx_http_special_response.c
+patch -p0 < /tmp/nginx-remove-server-name.patch
 
 # Configure nginx
 ./configure \

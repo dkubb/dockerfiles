@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -o errexit -o pipefail -o noglob -o noclobber -o nounset
+IFS=$'\n\t'
+
+exec runsvdir -P /etc/service

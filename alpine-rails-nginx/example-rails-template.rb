@@ -32,29 +32,29 @@ file 'config/postgres.sh', <<-'POSTGRES'
 set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
 
-export PATH="/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:$PATH"
-
 exec chpst -u postgres -- postgres -D $PGDATA
 POSTGRES
 
 file 'Dockerfile', <<-'DOCKERFILE'
-FROM dkubb/alpine-nix-rails-nginx:latest
+FROM dkubb/alpine-rails-nginx:latest
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 ENV RAILS_ENV development
 ENV PGDATA    /var/lib/postgresql/data
 
+RUN apk add postgresql=9.4.4-r0
+
 COPY config/postgres.sh /etc/sv/postgres
-RUN source /etc/profile.d/nix.sh \
-  && /root/setup-directories.sh root /etc/sv /etc/service/postgres \
-  && /root/setup-directories.sh postgres "$(dirname "$PGDATA")" "$PGDATA" \
+RUN  /root/setup-directories.sh root     r  /etc/service/postgres \
+  && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
 
-# Setup default user and database
 USER postgres
-RUN source /etc/profile.d/nix.sh \
-  && pg_ctl initdb --pgdata $PGDATA \
+WORKDIR /var/lib/postgresql
+
+# Setup default user and database
+RUN pg_ctl initdb --pgdata $PGDATA \
   && pg_ctl start --pgdata $PGDATA \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
   && createuser rails \
@@ -62,17 +62,16 @@ RUN source /etc/profile.d/nix.sh \
   && pg_ctl stop --pgdata $PGDATA
 
 USER root
+WORKDIR /opt/rails
 
-# TODO: use the bundix tool to package up Gemfile deps, see:
-# https://nixos.org/nixpkgs/manual/#sec-language-ruby
-
+# Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN source /etc/profile.d/nix.sh \
-  && until timeout -t 180 bundle; do :; done
+RUN until timeout -t 180 bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \
   && mv /opt/rails/public /opt/nginx/html \
-  && /root/setup-directories.sh nginx /opt/nginx \
-  && /root/setup-directories.sh rails /opt/rails
+  && /root/setup-directories.sh nginx r  /opt/nginx \
+  && /root/setup-directories.sh rails r  /opt/rails \
+  && /root/setup-directories.sh rails rw /opt/rails/log
 DOCKERFILE

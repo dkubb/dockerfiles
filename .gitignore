@@ -1,4 +1,4 @@
 *.sw[op]
 
 # Ignore example rails application
-/alpine-nix-rails-nginx/example
+/alpine-rails-nginx/example

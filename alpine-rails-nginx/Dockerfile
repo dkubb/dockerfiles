@@ -20,6 +20,10 @@ COPY nginx-remove-server-name.patch /tmp/
 RUN /tmp/install-nginx.sh \
   && rm -rf /usr/local/src /tmp/*
 
+# Upgrade bundler
+RUN echo 'gem: --no-document' > ~/.gemrc \
+  && gem install bundler
+
 # Add utility scripts
 COPY setup-directories.sh /root/
 

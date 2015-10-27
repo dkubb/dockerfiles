@@ -2,8 +2,8 @@
 alpine-baselayout   = 2.3.2-r2
 alpine-conf         = 3.2.1-r7
 busybox-initscripts = 2.3-r1
-musl                = 1.1.12-r0
-musl-utils          = 1.1.12-r0
+musl                = 1.1.12-r1
+musl-utils          = 1.1.12-r1
 
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3
@@ -16,13 +16,13 @@ pcre-dev            = 8.37-r2
 
 # service runtime dependencies
 acl                 = 2.2.52-r2
+libffi-dev          = 3.2.1-r1
 libxml2-dev         = 2.9.2-r2
 libxslt-dev         = 1.1.28-r1
 nodejs              = 4.2.1-r0
 postgresql-dev      = 9.4.4-r0
 ruby                = 2.2.3-r0
 ruby-bigdecimal     = 2.2.3-r0
-ruby-bundler        = 1.10.5-r0
 ruby-dev            = 2.2.3-r0
 ruby-io-console     = 2.2.3-r0
 ruby-irb            = 2.2.3-r0

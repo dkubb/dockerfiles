@@ -33,7 +33,7 @@ verified_curl \
 cd nginx-$NGINX_VERSION
 
 # Remove server name from error pages
-patch -p0 < /tmp/nginx-remove-server-name.patch
+patch --strip 0 < /tmp/nginx-remove-server-name.patch
 
 # Configure nginx
 ./configure \

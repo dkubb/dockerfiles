@@ -1,4 +1,4 @@
---- src/http/ngx_http_special_response.c.orig	2015-10-26 15:12:48.000000000 -0700
+--- src/http/ngx_http_special_response.c	2015-10-26 15:12:48.000000000 -0700
 +++ src/http/ngx_http_special_response.c	2015-10-26 15:13:33.000000000 -0700
 @@ -19,14 +19,12 @@
  

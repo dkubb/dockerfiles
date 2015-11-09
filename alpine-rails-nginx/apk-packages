@@ -1,7 +1,10 @@
 # system runtime dependencies
-alpine-baselayout   = 2.3.2-r2
+alpine-base         = 3.2.0-r1
+alpine-baselayout   = 2.3.2-r5
 alpine-conf         = 3.2.1-r7
+busybox             = 1.24.1-r4
 busybox-initscripts = 2.3-r1
+busybox-suid        = 1.24.1-r4
 musl                = 1.1.12-r1
 musl-utils          = 1.1.12-r1
 
@@ -11,7 +14,7 @@ bash                = 4.3.42-r1
 curl                = 7.45.0-r0
 
 # nginx build dependencies
-linux-headers       = 3.18.5-r0
+linux-headers       = 4.1.12-r0
 pcre-dev            = 8.37-r2
 
 # service runtime dependencies
@@ -20,7 +23,7 @@ libffi-dev          = 3.2.1-r1
 libxml2-dev         = 2.9.2-r2
 libxslt-dev         = 1.1.28-r1
 nodejs              = 4.2.1-r0
-postgresql-dev      = 9.4.4-r0
+postgresql-dev      = 9.4.5-r1
 ruby                = 2.2.3-r0
 ruby-bigdecimal     = 2.2.3-r0
 ruby-dev            = 2.2.3-r0

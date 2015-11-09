@@ -66,7 +66,7 @@ WORKDIR /opt/rails
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until timeout -t 180 bundle; do :; done
+RUN until bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \

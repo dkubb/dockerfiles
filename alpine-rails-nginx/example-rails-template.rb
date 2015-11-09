@@ -42,7 +42,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 ENV RAILS_ENV development
 ENV PGDATA    /var/lib/postgresql/data
 
-RUN apk add postgresql=9.4.4-r0
+RUN apk add postgresql=9.4.5-r1
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN  /root/setup-directories.sh root     r  /etc/service/postgres \
@@ -66,7 +66,7 @@ WORKDIR /opt/rails
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until timeout -t 180 bundle; do :; done
+RUN until bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \

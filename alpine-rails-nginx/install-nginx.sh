@@ -37,6 +37,9 @@ patch --strip 0 < /tmp/nginx-remove-server-name.patch
 
 # Configure nginx
 ./configure \
+  --with-cc-opt="-static -static-libgcc" \
+  --with-ld-opt="-static" \
+  --with-cpu-opt=generic \
   --prefix=/usr/local/nginx \
   --sbin-path=/usr/local/sbin/nginx \
   --conf-path=/etc/nginx/nginx.conf \
@@ -47,7 +50,7 @@ patch --strip 0 < /tmp/nginx-remove-server-name.patch
   --http-client-body-temp-path=/var/cache/nginx/client_body_temp \
   --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
   --user=nginx \
-  --group=nginx \
+  --group=nogroup \
   --add-module=/usr/local/src/headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION \
   --with-http_gzip_static_module \
   --with-http_realip_module \

@@ -4,8 +4,8 @@ FROM alpine:edge
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 # Create system users
-RUN adduser -DS nginx
-RUN adduser -DS rails
+RUN adduser -DSH -G nogroup nginx \
+  && adduser -DSH -G nogroup rails
 
 # Upgrade installed system dependencies
 RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories

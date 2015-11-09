@@ -37,6 +37,9 @@ patch --strip 0 < /tmp/nginx-remove-server-name.patch
 
 # Configure nginx
 ./configure \
+  --with-cc-opt="-static -static-libgcc" \
+  --with-ld-opt="-static" \
+  --with-cpu-opt=generic \
   --prefix=/usr/local/nginx \
   --sbin-path=/usr/local/sbin/nginx \
   --conf-path=/etc/nginx/nginx.conf \

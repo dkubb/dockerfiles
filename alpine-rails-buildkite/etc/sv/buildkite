@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -o errexit -o pipefail -o noglob -o noclobber -o nounset
+IFS=$'\n\t'
+
+export HOME=/var/buildkite
+export GEM_HOME=$HOME/.gem
+export BUILDKITE_AGENT_VERSION=edge
+export BUILDKITE_BUILD_PATH=$HOME/builds
+export BUILDKITE_HOOKS_PATH=$HOME/hooks
+export BUILDKITE_BOOTSTRAP_SCRIPT_PATH=/usr/lib/buildkite/bootstrap.sh
+
+exec chpst -u buildkite -- buildkite-agent start

@@ -1,12 +1,14 @@
 # system runtime dependencies
 alpine-base         = 3.2.0-r1
-alpine-baselayout   = 2.3.2-r5
+alpine-baselayout   = 2.3.2-r7
 alpine-conf         = 3.2.1-r7
+apk-tools           = 2.6.5-r0
 busybox             = 1.24.1-r4
 busybox-initscripts = 2.3-r1
 busybox-suid        = 1.24.1-r4
 musl                = 1.1.12-r1
 musl-utils          = 1.1.12-r1
+openrc              = 0.18.3-r0
 
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3
@@ -24,9 +26,9 @@ libxml2-dev         = 2.9.2-r2
 libxslt-dev         = 1.1.28-r1
 nodejs              = 4.2.1-r0
 postgresql-dev      = 9.4.5-r1
-ruby                = 2.2.3-r0
-ruby-bigdecimal     = 2.2.3-r0
-ruby-dev            = 2.2.3-r0
-ruby-io-console     = 2.2.3-r0
-ruby-irb            = 2.2.3-r0
+ruby                = 2.2.3-r1
+ruby-bigdecimal     = 2.2.3-r1
+ruby-dev            = 2.2.3-r1
+ruby-io-console     = 2.2.3-r1
+ruby-irb            = 2.2.3-r1
 runit@testing       = 2.1.2-r2

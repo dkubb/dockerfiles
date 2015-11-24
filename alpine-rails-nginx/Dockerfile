@@ -8,17 +8,18 @@ RUN adduser -DSH -G nogroup nginx \
   && adduser -DSH -G nogroup rails
 
 # Upgrade installed system dependencies
-RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 COPY apk-packages /tmp/
-RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
+RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+  && sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
-  | xargs apk add --update-cache
+  | xargs apk add --update-cache \
+  && rm -- /tmp/apk-packages
 
 # Install nginx
 COPY install-nginx.sh /tmp/
 COPY nginx-remove-server-name.patch /tmp/
 RUN /tmp/install-nginx.sh \
-  && rm -rf /usr/local/src /tmp/*
+  && rm -rf -- /usr/local/src /tmp/*
 
 # Upgrade bundler
 RUN echo 'gem: --no-document' > ~/.gemrc \

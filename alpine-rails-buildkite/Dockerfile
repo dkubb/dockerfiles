@@ -11,9 +11,9 @@ RUN echo '@testing https://s3.amazonaws.com/alpine-packages/testing' >> /etc/apk
   && sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
   | xargs apk add --update-cache \
-  && rm /tmp/apk-packages
+  && rm -- /tmp/apk-packages
 
-RUN rm -r /etc/sv/nginx /etc/service/nginx /etc/sv/rails /etc/service/rails \
+RUN rm -r -- /etc/sv/nginx /etc/service/nginx /etc/sv/rails /etc/service/rails \
   && /root/setup-directories.sh root     r  /etc/service/postgres /etc/service/buildkite \
   && /root/setup-directories.sh postgres rw /var/db/postgresql \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run \

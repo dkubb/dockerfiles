@@ -13,13 +13,13 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
   && sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
   | xargs apk add --update-cache \
-  && rm /tmp/apk-packages
+  && rm -- /tmp/apk-packages
 
 # Install nginx
 COPY install-nginx.sh /tmp/
 COPY nginx-remove-server-name.patch /tmp/
 RUN /tmp/install-nginx.sh \
-  && rm -rf /usr/local/src /tmp/*
+  && rm -rf -- /usr/local/src /tmp/*
 
 # Upgrade bundler
 RUN echo 'gem: --no-document' > ~/.gemrc \

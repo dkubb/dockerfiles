@@ -1,7 +1,7 @@
-FROM dkubb/alpine-rails-nginx
+# dkubb/alpine-rails-buildkite
 
-# Improve root state, intend to be pushed there
-WORKDIR /
+FROM dkubb/alpine-ruby
+MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 COPY etc /etc
 
@@ -13,21 +13,18 @@ RUN echo '@testing https://s3.amazonaws.com/alpine-packages/testing' >> /etc/apk
   | xargs apk add --update-cache \
   && rm -- /tmp/apk-packages
 
-RUN rm -r -- /etc/sv/nginx /etc/service/nginx /etc/sv/rails /etc/service/rails \
-  && /root/setup-directories.sh root     r  /etc/service/postgres /etc/service/buildkite \
+# Create system directories and service symlinks
+RUN /root/setup-directories.sh  root     r  /etc/service/postgres /etc/service/buildkite \
   && /root/setup-directories.sh postgres rw /var/db/postgresql \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run \
   && ln -s -- /etc/sv/buildkite /etc/service/buildkite/run
 
-USER buildkite
+# Setup bundler for the buildkite user
+RUN cp --recursive -- ~/.bundle ~buildkite \
+  && /root/setup-directories.sh buildkite rw ~buildkite/.bundle
 
-# Setup bundler for buildkite user
-RUN bundle config --global build.nokogiri '--use-system-libraries' \
-  && bundle config --global jobs '8'
-
+# Setup database and user
 USER postgres
-
-# Setup user and database
 RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \

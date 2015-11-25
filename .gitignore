@@ -1,4 +1,5 @@
 *.sw[op]
+.DS_Store
 
 # Ignore example rails application
 /alpine-rails-nginx/example

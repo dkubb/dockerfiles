@@ -42,7 +42,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 ENV RAILS_ENV development
 ENV PGDATA    /var/lib/postgresql/data
 
-RUN apk add postgresql=9.4.5-r1
+RUN apk add postgresql-dev=9.4.5-r1
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN  /root/setup-directories.sh root     r  /etc/service/postgres \

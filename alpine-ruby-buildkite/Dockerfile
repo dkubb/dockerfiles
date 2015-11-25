@@ -1,4 +1,4 @@
-# dkubb/alpine-rails-buildkite
+# dkubb/alpine-ruby-buildkite
 
 FROM dkubb/alpine-ruby
 MAINTAINER Dan Kubb <dkubb@fastmail.com>

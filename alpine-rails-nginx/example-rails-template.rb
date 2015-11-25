@@ -38,7 +38,7 @@ exec chpst -u postgres -- postgres
 POSTGRES
 
 file 'Dockerfile', <<-'DOCKERFILE'
-FROM dkubb/alpine-rails-nginx:latest
+FROM dkubb/alpine-rails-nginx
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 ENV RAILS_ENV development

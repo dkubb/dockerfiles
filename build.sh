@@ -5,8 +5,8 @@ IFS=$'\n\t'
 
 readonly IMAGES=(
   alpine-ruby
-  alpine-rails-nginx
   alpine-rails-buildkite
+  alpine-rails-nginx
   alpine-rails-nginx/example
 )
 

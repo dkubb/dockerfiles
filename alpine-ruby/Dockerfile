@@ -28,10 +28,10 @@ RUN echo 'gem: --no-document' > ~/.gemrc \
   && gem install bundler
 
 # Setup bundler for the root user
-RUN bundle config --global build.nokogiri '--use-system-libraries' \
-  && bundle config --global frozen 'true' \
-  && bundle config --global jobs '8' \
-  && bundle config --global without 'development test'
+RUN bundle config --global -- build.nokogiri '--use-system-libraries' \
+  && bundle config --global -- frozen 'true' \
+  && bundle config --global -- jobs '8' \
+  && bundle config --global -- without 'development test'
 
 # Set the entrypoint for children docker images
 ENTRYPOINT ["/sbin/runit"]

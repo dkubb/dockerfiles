@@ -30,7 +30,7 @@ RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
-  && createuser buildkite --superuser \
+  && createuser --superuser -- buildkite \
   && pg_ctl stop
 
 USER root

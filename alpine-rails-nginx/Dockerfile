@@ -35,6 +35,6 @@ RUN /tmp/install-nginx.sh \
 RUN cp --recursive -- ~/.bundle ~rails \
   && /root/setup-directories.sh rails rw ~rails/.bundle
 USER rails
-RUN bundle config --global path 'vendor/bundle'
+RUN bundle config --global -- path 'vendor/bundle'
 
 USER root

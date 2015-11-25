@@ -32,7 +32,9 @@ file 'config/postgres.sh', <<-'POSTGRES'
 set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
 
-exec chpst -u postgres -- postgres -D $PGDATA
+export PGDATA=/var/db/postgresql/data
+
+exec chpst -u postgres -- postgres
 POSTGRES
 
 file 'Dockerfile', <<-'DOCKERFILE'
@@ -40,12 +42,12 @@ FROM dkubb/alpine-rails-nginx:latest
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 ENV RAILS_ENV development
-ENV PGDATA    /var/lib/postgresql/data
 
 RUN apk add postgresql-dev=9.4.5-r1
 
 COPY config/postgres.sh /etc/sv/postgres
-RUN  /root/setup-directories.sh root     r  /etc/service/postgres \
+RUN export PGDATA=/var/db/postgresql/data \
+  && /root/setup-directories.sh root     r  /etc/service/postgres \
   && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
@@ -54,12 +56,13 @@ USER postgres
 WORKDIR /var/lib/postgresql
 
 # Setup default user and database
-RUN pg_ctl initdb --pgdata $PGDATA \
-  && pg_ctl start --pgdata $PGDATA \
+RUN export PGDATA=/var/db/postgresql/data \
+  && pg_ctl initdb \
+  && pg_ctl start \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
-  && createuser rails \
-  && createdb --owner rails example_development \
-  && pg_ctl stop --pgdata $PGDATA
+  && createuser -- rails \
+  && createdb --owner rails -- example_development \
+  && pg_ctl stop
 
 USER root
 WORKDIR /opt/rails

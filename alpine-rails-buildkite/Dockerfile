@@ -14,8 +14,9 @@ RUN echo '@testing https://s3.amazonaws.com/alpine-packages/testing' >> /etc/apk
   && rm -- /tmp/apk-packages
 
 # Create system directories and service symlinks
-RUN /root/setup-directories.sh  root     r  /etc/service/postgres /etc/service/buildkite \
-  && /root/setup-directories.sh postgres rw /var/db/postgresql \
+RUN export PGDATA=/var/db/postgresql/data \
+  && /root/setup-directories.sh  root     r /etc/service/postgres /etc/service/buildkite \
+  && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run \
   && ln -s -- /etc/sv/buildkite /etc/service/buildkite/run
 

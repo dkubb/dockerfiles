@@ -4,8 +4,9 @@ set -o errexit -o pipefail -o noglob -o noclobber -o nounset
 IFS=$'\n\t'
 
 readonly IMAGES=(
+  alpine-ruby
+  alpine-ruby-buildkite
   alpine-rails-nginx
-  alpine-rails-buildkite
   alpine-rails-nginx/example
 )
 

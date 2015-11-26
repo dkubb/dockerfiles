@@ -14,12 +14,12 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
   && rm -- /tmp/apk-packages
 
 # Add utility scripts
-COPY setup-directories.sh /root/
+COPY sbin /usr/local/sbin
 
 # Create system directories and service symlinks
 RUN mkdir -m 1750 -- /opt \
   && chown root: -- /opt \
-  && /root/setup-directories.sh root r /etc/runit /etc/sv /etc/service \
+  && setup-directories.sh root r /etc/runit /etc/sv /etc/service \
   && ln -s -- /etc/service /service
 
 # Upgrade rubygems and bundler

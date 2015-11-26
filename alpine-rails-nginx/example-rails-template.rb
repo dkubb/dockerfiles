@@ -29,8 +29,7 @@ PROCFILE
 file 'config/postgres.sh', <<-'POSTGRES'
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 export PGDATA=/var/db/postgresql/data
 
@@ -47,8 +46,8 @@ RUN apk add postgresql-dev=9.4.5-r1
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN export PGDATA=/var/db/postgresql/data \
-  && /root/setup-directories.sh root     r  /etc/service/postgres \
-  && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
+  && setup-directories.sh root     r  /etc/service/postgres \
+  && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
 
@@ -74,7 +73,7 @@ RUN until bundle; do :; done
 COPY . /opt/rails
 RUN mkdir /opt/nginx \
   && mv /opt/rails/public /opt/nginx/html \
-  && /root/setup-directories.sh nginx r  /opt/nginx \
-  && /root/setup-directories.sh rails r  /opt/rails \
-  && /root/setup-directories.sh rails rw /opt/rails/log /opt/rails/tmp
+  && setup-directories.sh nginx r  /opt/nginx \
+  && setup-directories.sh rails r  /opt/rails \
+  && setup-directories.sh rails rw /opt/rails/log /opt/rails/tmp
 DOCKERFILE

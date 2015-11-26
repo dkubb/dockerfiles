@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 user="$1"
 perms="$2"

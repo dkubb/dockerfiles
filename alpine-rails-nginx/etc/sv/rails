@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 cd /opt/rails
 eval "exec chpst -u rails -- $(ruby -r yaml -e 'puts YAML.load_file("Procfile").fetch("web")')"

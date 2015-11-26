@@ -15,14 +15,14 @@ RUN echo '@testing https://s3.amazonaws.com/alpine-packages/testing' >> /etc/apk
 
 # Create system directories and service symlinks
 RUN export PGDATA=/var/db/postgresql/data \
-  && /root/setup-directories.sh  root     r /etc/service/postgres /etc/service/buildkite \
-  && /root/setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
+  && setup-directories.sh  root     r /etc/service/postgres /etc/service/buildkite \
+  && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run \
   && ln -s -- /etc/sv/buildkite /etc/service/buildkite/run
 
 # Setup bundler for the buildkite user
 RUN cp --recursive -- ~/.bundle ~buildkite \
-  && /root/setup-directories.sh buildkite rw ~buildkite/.bundle
+  && setup-directories.sh buildkite rw ~buildkite/.bundle
 
 # Setup database and user
 USER postgres

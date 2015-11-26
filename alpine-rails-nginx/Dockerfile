@@ -18,10 +18,10 @@ RUN adduser -DSH nginx \
   && adduser -DSH rails
 
 # Create system directories and service symlinks
-RUN /root/setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
-  && /root/setup-directories.sh nginx r  /etc/nginx \
-  && /root/setup-directories.sh nginx rw /var/run/nginx /var/cache/nginx /var/log/nginx \
-  && /root/setup-directories.sh rails rw /opt/rails /var/run/rails \
+RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
+  && setup-directories.sh nginx r  /etc/nginx \
+  && setup-directories.sh nginx rw /var/run/nginx /var/cache/nginx /var/log/nginx \
+  && setup-directories.sh rails rw /opt/rails /var/run/rails \
   && ln -s -- /etc/sv/nginx /etc/service/nginx/run \
   && ln -s -- /etc/sv/rails /etc/service/rails/run
 
@@ -33,7 +33,7 @@ RUN /tmp/install-nginx.sh \
 
 # Setup bundler for the rails user
 RUN cp --recursive -- ~/.bundle ~rails \
-  && /root/setup-directories.sh rails rw ~rails/.bundle
+  && setup-directories.sh rails rw ~rails/.bundle
 USER rails
 RUN bundle config --global -- path 'vendor/bundle'
 

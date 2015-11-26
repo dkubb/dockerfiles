@@ -14,8 +14,8 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
   && rm -- /tmp/apk-packages
 
 # Create system users
-RUN adduser -DSH -G nogroup nginx \
-  && adduser -DSH -G nogroup rails
+RUN adduser -DSH nginx \
+  && adduser -DSH rails
 
 # Create system directories and service symlinks
 RUN /root/setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \

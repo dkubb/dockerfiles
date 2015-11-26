@@ -18,7 +18,7 @@ COPY setup-directories.sh /root/
 
 # Create system directories and service symlinks
 RUN mkdir -m 1750 -- /opt \
-  && chown root:nogroup -- /opt \
+  && chown root: -- /opt \
   && /root/setup-directories.sh root r /etc/runit /etc/sv /etc/service \
   && ln -s -- /etc/service /service
 

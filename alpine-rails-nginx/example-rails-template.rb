@@ -29,8 +29,7 @@ PROCFILE
 file 'config/postgres.sh', <<-'POSTGRES'
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 export PGDATA=/var/db/postgresql/data
 

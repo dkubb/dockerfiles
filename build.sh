@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source alpine-ruby/sbin/strict-mode.sh
 
 readonly IMAGES=(
   alpine-ruby

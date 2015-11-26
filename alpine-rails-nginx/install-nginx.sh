@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 NGINX_VERSION=1.9.5
 NGINX_HASH=48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b

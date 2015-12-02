@@ -33,7 +33,7 @@ RUN /tmp/install-nginx.sh \
 
 # Setup bundler for the root user
 RUN bundle config --global -- gemfile '/opt/rails/Gemfile' \
-  && bundle config --global -- path '/opt/rails/vendor/bundle'
+  && bundle config --global -- deployment
 
 # Setup bundler for the rails user
 RUN cp --recursive -- ~/.bundle ~rails \

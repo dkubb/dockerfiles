@@ -66,7 +66,7 @@ USER root
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until bundle; do :; done
+RUN until timeout -t 180 bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \

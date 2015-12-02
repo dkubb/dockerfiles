@@ -63,7 +63,6 @@ RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl stop
 
 USER root
-WORKDIR /opt/rails
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/

@@ -33,6 +33,7 @@ source strict-mode.sh
 
 export PGDATA=/var/db/postgresql/data
 
+cd $PGDATA
 exec chpst -u postgres -- postgres
 POSTGRES
 

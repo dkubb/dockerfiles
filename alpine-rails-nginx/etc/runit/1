@@ -5,3 +5,6 @@ IFS=$'\n\t'
 
 # Setup acl to allow nginx user read-only access to socket
 setfacl --modify u:nginx:rX -- /var/run/rails
+
+# Setup acl to allow nginx and user read-only access to /opt
+setfacl --modify u:nginx:rX,u:rails:rX -- /opt

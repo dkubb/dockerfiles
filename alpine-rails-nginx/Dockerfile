@@ -15,7 +15,7 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
 
 # Create system users
 RUN adduser -DSH nginx \
-  && adduser -DSH rails
+  && adduser -DS rails
 
 # Create system directories and service symlinks
 RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
@@ -31,10 +31,10 @@ COPY nginx-remove-server-name.patch /tmp/
 RUN /tmp/install-nginx.sh \
   && rm -rf -- /usr/local/src /tmp/*
 
+# Setup bundler for the root user
+RUN bundle config --global -- gemfile '/opt/rails/Gemfile' \
+  && bundle config --global -- path '/opt/rails/vendor/bundle'
+
 # Setup bundler for the rails user
 RUN cp --recursive -- ~/.bundle ~rails \
   && setup-directories.sh rails rw ~rails/.bundle
-USER rails
-RUN bundle config --global -- path 'vendor/bundle'
-
-USER root

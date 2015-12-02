@@ -52,10 +52,8 @@ RUN export PGDATA=/var/db/postgresql/data \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
 
+# Setup database and user
 USER postgres
-WORKDIR /var/lib/postgresql
-
-# Setup default user and database
 RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \

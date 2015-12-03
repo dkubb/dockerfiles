@@ -1,5 +1,5 @@
 # service runtime dependencies
 buildkite-agent@testing = 2.1.4-r0
-imagemagick             = 6.9.2.6-r0
+imagemagick             = 6.9.2.7-r0
 phantomjs@testing       = 1.9.8-r0
 postgresql-dev          = 9.4.5-r1

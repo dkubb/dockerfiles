@@ -33,6 +33,7 @@ source strict-mode.sh
 
 export PGDATA=/var/db/postgresql/data
 
+cd $PGDATA
 exec chpst -u postgres -- postgres
 POSTGRES
 
@@ -51,10 +52,8 @@ RUN export PGDATA=/var/db/postgresql/data \
   && chmod u+x /etc/sv/postgres \
   && ln -s -- /etc/sv/postgres /etc/service/postgres/run
 
+# Setup database and user
 USER postgres
-WORKDIR /var/lib/postgresql
-
-# Setup default user and database
 RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \
@@ -64,11 +63,10 @@ RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl stop
 
 USER root
-WORKDIR /opt/rails
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until bundle; do :; done
+RUN until timeout -t 180 bundle; do :; done
 
 COPY . /opt/rails
 RUN mkdir /opt/nginx \

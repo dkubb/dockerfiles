@@ -53,8 +53,11 @@ patch --strip 0 < /tmp/nginx.patch
   --add-module=/usr/local/src/headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION \
   --with-http_gzip_static_module \
   --with-http_realip_module \
+  --with-http_ssl_module \
   --with-http_stub_status_module \
+  --with-http_v2_module \
   --with-ipv6 \
+  --with-openssl=/usr \
   --without-http_auth_basic_module \
   --without-http_autoindex_module \
   --without-http_browser_module \

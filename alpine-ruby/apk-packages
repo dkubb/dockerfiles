@@ -12,13 +12,13 @@ openrc              = 0.19-r0
 
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3
-bash                = 4.3.42-r1
+bash                = 4.3.42-r3
 curl                = 7.46.0-r1
 
 # service runtime dependencies
-ruby                = 2.2.3-r1
-ruby-bigdecimal     = 2.2.3-r1
-ruby-dev            = 2.2.3-r1
-ruby-io-console     = 2.2.3-r1
-ruby-irb            = 2.2.3-r1
+ruby                = 2.2.4-r0
+ruby-bigdecimal     = 2.2.4-r0
+ruby-dev            = 2.2.4-r0
+ruby-io-console     = 2.2.4-r0
+ruby-irb            = 2.2.4-r0
 runit@testing       = 2.1.2-r2

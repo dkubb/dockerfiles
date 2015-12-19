@@ -1,0 +1,34 @@
+--- auto/lib/openssl/conf
++++ auto/lib/openssl/conf
+@@ -28,10 +28,10 @@
+             have=NGX_OPENSSL . auto/have
+             have=NGX_SSL . auto/have
+
+-            CORE_INCS="$CORE_INCS $OPENSSL/.openssl/include"
+-            CORE_DEPS="$CORE_DEPS $OPENSSL/.openssl/include/openssl/ssl.h"
+-            CORE_LIBS="$CORE_LIBS $OPENSSL/.openssl/lib/libssl.a"
+-            CORE_LIBS="$CORE_LIBS $OPENSSL/.openssl/lib/libcrypto.a"
++            CORE_INCS="$CORE_INCS $OPENSSL/include"
++            CORE_DEPS="$CORE_DEPS $OPENSSL/include/openssl/ssl.h"
++            CORE_LIBS="$CORE_LIBS $OPENSSL/lib/libssl.a"
++            CORE_LIBS="$CORE_LIBS $OPENSSL/lib/libcrypto.a"
+             CORE_LIBS="$CORE_LIBS $NGX_LIBDL"
+
+             if [ "$NGX_PLATFORM" = win32 ]; then
+--- src/http/ngx_http_special_response.c
++++ src/http/ngx_http_special_response.c
+@@ -19,14 +19,12 @@
+
+
+ static u_char ngx_http_error_full_tail[] =
+-"<hr><center>" NGINX_VER "</center>" CRLF
+ "</body>" CRLF
+ "</html>" CRLF
+ ;
+
+
+ static u_char ngx_http_error_tail[] =
+-"<hr><center>nginx</center>" CRLF
+ "</body>" CRLF
+ "</html>" CRLF
+ ;

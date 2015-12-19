@@ -2,10 +2,10 @@
 
 source strict-mode.sh
 
-NGINX_VERSION=1.9.5
-NGINX_HASH=48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b
-NGINX_HEADERS_MORE_VERSION=0.261
-NGINX_HEADERS_MORE_HASH=03d1f5fbecba8565f247d87a38f5e4b6440b0a56d752bdd2b29af2f1c4aea480
+NGINX_VERSION=1.9.9
+NGINX_HASH=de66bb2b11c82533aa5cb5ccc27cbce736ab87c9f2c761e5237cda0b00068d73
+NGINX_HEADERS_MORE_VERSION=0.28
+NGINX_HEADERS_MORE_HASH=67e5ca6cd9472938333c4530ab8c8b8bc9fe910a8cb237e5e5f1853e14725580
 
 function verified_curl {
   url="$1"
@@ -31,8 +31,8 @@ verified_curl \
 
 cd nginx-$NGINX_VERSION
 
-# Remove server name from error pages
-patch --strip 0 < /tmp/nginx-remove-server-name.patch
+# Patch nginx source
+patch --strip 0 < /tmp/nginx.patch
 
 # Configure nginx
 ./configure \
@@ -53,8 +53,11 @@ patch --strip 0 < /tmp/nginx-remove-server-name.patch
   --add-module=/usr/local/src/headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION \
   --with-http_gzip_static_module \
   --with-http_realip_module \
+  --with-http_ssl_module \
   --with-http_stub_status_module \
+  --with-http_v2_module \
   --with-ipv6 \
+  --with-openssl=/usr \
   --without-http_auth_basic_module \
   --without-http_autoindex_module \
   --without-http_browser_module \

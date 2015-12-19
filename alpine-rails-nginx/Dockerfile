@@ -27,8 +27,9 @@ RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
 
 # Install nginx
 COPY install-nginx.sh /tmp/
-COPY nginx-remove-server-name.patch /tmp/
+COPY nginx.patch /tmp/
 RUN /tmp/install-nginx.sh \
+  && setup-directories.sh nginx r /etc/nginx \
   && rm -rf -- /usr/local/src /tmp/*
 
 # Setup bundler for the root user

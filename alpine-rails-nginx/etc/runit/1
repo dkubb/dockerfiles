@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noglob -o noclobber -o nounset
-IFS=$'\n\t'
+source strict-mode.sh
 
 # Setup acl to allow nginx user read-only access to socket
 setfacl --modify u:nginx:rX -- /var/run/rails

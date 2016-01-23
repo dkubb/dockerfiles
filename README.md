@@ -11,5 +11,5 @@ A collection of Dockerfile configurations.
 
 ```bash
 # Build and run an example rails application
-./build.sh && docker run --interactive --tty --rm --publish 80:8080 dkubb/alpine-rails-nginx/example
+./build.sh && docker run --interactive --tty --rm --sig-proxy --publish 80:8080 dkubb/alpine-rails-nginx/example
 ```

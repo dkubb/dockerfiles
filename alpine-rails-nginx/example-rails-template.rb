@@ -43,7 +43,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 ENV RAILS_ENV development
 
-RUN apk add postgresql-dev=9.4.5-r1
+RUN apk add postgresql-dev=9.5.0-r0
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN export PGDATA=/var/db/postgresql/data \

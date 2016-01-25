@@ -4,8 +4,8 @@ A collection of Dockerfile configurations.
 
 ## Requirements
 
-* [Ruby 2.2.3+](https://www.ruby-lang.org/en/downloads/)
-* [Rails 4.2.4+](https://rubygems.org/gems/rails)
+* [Ruby 2.2.4+](https://www.ruby-lang.org/en/downloads/)
+* [Rails 4.2.5+](https://rubygems.org/gems/rails)
 
 ## Quickstart
 

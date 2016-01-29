@@ -33,8 +33,9 @@ RUN /tmp/install-nginx.sh \
   && rm -rf -- /usr/local/src /tmp/*
 
 # Setup bundler for the root user
-RUN bundle config --global -- gemfile '/opt/rails/Gemfile' \
-  && bundle config --global -- deployment
+RUN bundle config --global -- disable_shared_gems '1' \
+  && bundle config --global -- gemfile '/opt/rails/Gemfile' \
+  && bundle config --global -- path 'vendor/bundle'
 
 # Setup bundler for the rails user
 RUN cp --recursive -- ~/.bundle ~rails \

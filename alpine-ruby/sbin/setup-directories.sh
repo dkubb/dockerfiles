@@ -13,10 +13,12 @@ for directory in "${directories[@]}"; do
   # Set the directory to be owned by user and default group
   chown --recursive "$user:" -- "$directory"
 
-  # Set the files to be readable and writable by the owner
+  # Remove read/write perms for all
+  # Set the file specified perms by the owner
+  # Set the file to be executable by the owner if any execute bit is set
   # Set the directory to be executable by the owner
-  # Remove all other permissions from the group and other users
-  chmod -R "u=${perms}X,go-rwx" -- "$directory"
+  # Remove executable permissions for group and other
+  chmod -R "-rw,u+${perms}X,go-x" -- "$directory"
 
   # Set the directory sticky bit
   chmod +t -- "$directory"

@@ -13,7 +13,7 @@ openrc              = 0.19-r2
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3
 bash                = 4.3.42-r3
-curl                = 7.46.0-r1
+curl                = 7.47.0-r0
 
 # service runtime dependencies
 ruby                = 2.2.4-r0

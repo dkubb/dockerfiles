@@ -19,9 +19,10 @@ RUN adduser -DSH nginx \
 
 # Create system directories and service symlinks
 RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
-  && setup-directories.sh nginx r  /etc/nginx \
+  && setup-directories.sh nginx r  /etc/nginx /opt/nginx \
   && setup-directories.sh nginx rw /var/run/nginx /var/cache/nginx /var/log/nginx \
-  && setup-directories.sh rails rw /opt/rails /var/run/rails \
+  && setup-directories.sh rails r  /opt/rails \
+  && setup-directories.sh rails rw /var/run/rails /opt/rails/log /opt/rails/tmp \
   && ln -s -- /etc/sv/nginx /etc/service/nginx/run \
   && ln -s -- /etc/sv/rails /etc/service/rails/run
 

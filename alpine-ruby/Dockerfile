@@ -14,6 +14,9 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
 COPY etc  /etc
 COPY sbin /usr/local/sbin
 
+# Replace default sh command
+RUN ln -sfv /usr/local/sbin/sh-wrapper.sh /bin/sh
+
 # Create system directories and service symlinks
 RUN mkdir -m 1750 /opt \
   && chown root: /opt \

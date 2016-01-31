@@ -6,7 +6,8 @@ source strict-mode.sh
 setfacl --modify u:nginx:rX,u:rails:rX /opt
 
 # Setup acl to allow nginx user read-only access to socket and content
-setfacl --modify u:nginx:rX /opt/rails/public /var/run/rails
+setfacl --modify u:nginx:rX             /opt/rails
+setfacl --modify u:nginx:rX --recursive /opt/rails/public /var/run/rails
 
 # Setup acl to allow user to execute commands owned by root
 setfacl --modify u:rails:rX /usr/bin/bundle

@@ -34,7 +34,7 @@ source strict-mode.sh
 export PGDATA=/var/db/postgresql/data
 
 cd $PGDATA
-exec chpst -u postgres -- postgres
+exec chpst -u postgres postgres
 POSTGRES
 
 file 'Dockerfile', <<-'DOCKERFILE'
@@ -50,7 +50,7 @@ RUN export PGDATA=/var/db/postgresql/data \
   && setup-directories.sh root     r  /etc/service/postgres \
   && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
-  && ln -s -- /etc/sv/postgres /etc/service/postgres/run
+  && ln -s /etc/sv/postgres /etc/service/postgres/run
 
 # Setup database and user
 USER postgres
@@ -58,8 +58,8 @@ RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
-  && createuser -- rails \
-  && createdb --owner rails -- example_development \
+  && createuser rails \
+  && createdb --owner rails example_development \
   && pg_ctl stop
 
 USER root

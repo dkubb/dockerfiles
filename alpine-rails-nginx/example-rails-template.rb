@@ -41,7 +41,7 @@ file 'Dockerfile', <<-'DOCKERFILE'
 FROM dkubb/alpine-rails-nginx
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-ENV RAILS_ENV development
+ENV RAILS_ENV=development
 
 RUN apk add postgresql-dev=9.5.0-r0
 

@@ -3,6 +3,8 @@
 FROM dkubb/alpine-ruby
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
+ENV BUNDLE_GEMFILE=/opt/rails/Gemfile
+
 COPY etc /etc
 
 # Upgrade installed system dependencies
@@ -33,11 +35,6 @@ RUN /tmp/install-nginx.sh \
   && setup-directories.sh nginx r /etc/nginx \
   && rm -rf /usr/local/src /tmp/*
 
-# Setup bundler for the root user
-RUN bundle config --global disable_shared_gems '1' \
-  && bundle config --global gemfile '/opt/rails/Gemfile' \
-  && bundle config --global path 'vendor/bundle'
-
-# Setup bundler for the rails user
-RUN cp --recursive ~/.bundle ~rails \
-  && setup-directories.sh rails rw ~rails/.bundle
+# Setup bundler for application
+RUN cp --recursive ~/.bundle /opt/rails \
+  && setup-directories.sh rails r /opt/rails/.bundle

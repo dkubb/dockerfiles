@@ -27,8 +27,10 @@ RUN echo 'gem: --no-document' > ~/.gemrc \
 
 # Setup bundler for the root user
 RUN bundle config --global build.nokogiri '--use-system-libraries' \
+  && bundle config --global disable_shared_gems '1' \
   && bundle config --global frozen '1' \
   && bundle config --global jobs '8' \
+  && bundle config --global path 'vendor/bundle' \
   && bundle config --global without 'development:test'
 
 # Set the entrypoint for children docker images

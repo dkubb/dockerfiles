@@ -23,6 +23,7 @@ RUN setup-directories.sh root r /opt /etc/runit /etc/sv /etc/service \
 
 # Upgrade rubygems and bundler
 RUN echo 'gem: --no-document' > ~/.gemrc \
+  && umask 0022 \
   && gem update --system \
   && gem install bundler
 

@@ -10,3 +10,4 @@ setfacl --modify u:nginx:rX,u:rails:rX /opt
 
 # Setup acl to allow user to execute commands owned by root
 setfacl --modify u:rails:rX /usr/bin/bundle
+setfacl --modify u:nginx:rX /usr/local/sbin/nginx

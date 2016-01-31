@@ -68,7 +68,8 @@ USER root
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until timeout -t 180 bundle; do :; done
+RUN until timeout -t 180 bundle; do :; done \
+  && setup-directories.sh rails r /opt/rails
 
 COPY . /opt/rails
 RUN mv /opt/rails/public /opt/nginx/html \

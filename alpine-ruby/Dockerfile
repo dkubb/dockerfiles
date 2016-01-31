@@ -18,9 +18,7 @@ COPY sbin /usr/local/sbin
 RUN ln -sfv /usr/local/sbin/sh-wrapper.sh /bin/sh
 
 # Create system directories and service symlinks
-RUN mkdir -m 1750 /opt \
-  && chown root: /opt \
-  && setup-directories.sh root r /etc/runit /etc/sv /etc/service \
+RUN setup-directories.sh root r /opt /etc/runit /etc/sv /etc/service \
   && ln -s /etc/service /service
 
 # Upgrade rubygems and bundler

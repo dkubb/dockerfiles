@@ -72,5 +72,6 @@ RUN until timeout -t 180 bundle; do :; done
 
 COPY . /opt/rails
 RUN mv /opt/rails/public /opt/nginx/html \
-  && setup-directories.sh rails r /opt/rails
+  && setup-directories.sh rails r  /opt/rails \
+  && setup-directories.sh rails rw /opt/rails/log /opt/rails/tmp
 DOCKERFILE

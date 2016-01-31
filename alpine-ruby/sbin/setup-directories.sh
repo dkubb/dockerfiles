@@ -18,7 +18,7 @@ for directory in "${directories[@]}"; do
   # Set the file to be executable by the owner if any execute bit is set
   # Set the directory to be executable by the owner
   # Remove executable permissions for group and other
-  chmod -R "-rw,u+${perms}X,go-x" -- "$directory"
+  chmod -R "a-rw,u+${perms}X,go-x" -- "$directory"
 
   # Set the directory sticky bit
   chmod +t -- "$directory"

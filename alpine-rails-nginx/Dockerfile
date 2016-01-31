@@ -29,8 +29,7 @@ RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
   && ln -s /etc/sv/rails /etc/service/rails/run
 
 # Install nginx
-COPY install-nginx.sh /tmp/
-COPY nginx.patch /tmp/
+COPY install-nginx.sh nginx.patch /tmp/
 RUN /tmp/install-nginx.sh \
   && setup-directories.sh nginx r /etc/nginx \
   && rm -rf /usr/local/src /tmp/*

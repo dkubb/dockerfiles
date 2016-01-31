@@ -3,8 +3,6 @@
 FROM alpine:edge
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-COPY etc /etc
-
 # Upgrade installed system dependencies
 COPY apk-packages /tmp/
 RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
@@ -13,7 +11,7 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
   | xargs apk add --update-cache \
   && rm /tmp/apk-packages
 
-# Add utility scripts
+COPY etc  /etc
 COPY sbin /usr/local/sbin
 
 # Create system directories and service symlinks

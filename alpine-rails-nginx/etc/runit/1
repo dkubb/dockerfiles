@@ -14,4 +14,4 @@ setfacl --modify u:rails:rX /usr/bin/bundle
 setfacl --modify u:nginx:rX /usr/local/sbin/nginx
 
 # Trigger acl update application in aufs
-find / >/dev/null 2>&1
+find / >/dev/null

@@ -3,6 +3,8 @@
 FROM dkubb/alpine-ruby
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
+ENV BUNDLE_GEMFILE=/opt/rails/Gemfile
+
 COPY etc /etc
 
 # Upgrade installed system dependencies
@@ -11,7 +13,7 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
   && sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
   | xargs apk add --update-cache \
-  && rm -- /tmp/apk-packages
+  && rm /tmp/apk-packages
 
 # Create system users
 RUN adduser -DSH nginx \
@@ -19,24 +21,18 @@ RUN adduser -DSH nginx \
 
 # Create system directories and service symlinks
 RUN setup-directories.sh  root  r  /etc/service/nginx /etc/service/rails \
-  && setup-directories.sh nginx r  /etc/nginx \
   && setup-directories.sh nginx rw /var/run/nginx /var/cache/nginx /var/log/nginx \
-  && setup-directories.sh rails rw /opt/rails /var/run/rails \
-  && ln -s -- /etc/sv/nginx /etc/service/nginx/run \
-  && ln -s -- /etc/sv/rails /etc/service/rails/run
+  && setup-directories.sh rails r  /opt/rails \
+  && setup-directories.sh rails rw /var/run/rails /opt/rails/log /opt/rails/tmp \
+  && ln -s /etc/sv/nginx /etc/service/nginx/run \
+  && ln -s /etc/sv/rails /etc/service/rails/run
 
 # Install nginx
-COPY install-nginx.sh /tmp/
-COPY nginx.patch /tmp/
+COPY install-nginx.sh nginx.patch /tmp/
 RUN /tmp/install-nginx.sh \
   && setup-directories.sh nginx r /etc/nginx \
-  && rm -rf -- /usr/local/src /tmp/*
+  && rm -rf /usr/local/src /tmp/*
 
-# Setup bundler for the root user
-RUN bundle config --global -- disable_shared_gems '1' \
-  && bundle config --global -- gemfile '/opt/rails/Gemfile' \
-  && bundle config --global -- path 'vendor/bundle'
-
-# Setup bundler for the rails user
-RUN cp --recursive -- ~/.bundle ~rails \
-  && setup-directories.sh rails rw ~rails/.bundle
+# Setup bundler for application
+RUN cp --recursive ~/.bundle /opt/rails \
+  && setup-directories.sh rails r /opt/rails/.bundle

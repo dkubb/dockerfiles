@@ -34,23 +34,25 @@ source strict-mode.sh
 export PGDATA=/var/db/postgresql/data
 
 cd $PGDATA
-exec chpst -u postgres -- postgres
+exec chpst -u postgres postgres
 POSTGRES
 
 file 'Dockerfile', <<-'DOCKERFILE'
 FROM dkubb/alpine-rails-nginx
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-ENV RAILS_ENV development
+ENV RAILS_ENV=development
 
-RUN apk add postgresql-dev=9.5.0-r0
+RUN apk add postgresql-dev=9.5.0-r0 \
+  && chown postgres: /usr/bin/postgres \
+  && chmod 0700 /usr/bin/postgres
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN export PGDATA=/var/db/postgresql/data \
   && setup-directories.sh root     r  /etc/service/postgres \
   && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
-  && ln -s -- /etc/sv/postgres /etc/service/postgres/run
+  && ln -s /etc/sv/postgres /etc/service/postgres/run
 
 # Setup database and user
 USER postgres
@@ -58,20 +60,18 @@ RUN export PGDATA=/var/db/postgresql/data \
   && pg_ctl initdb \
   && pg_ctl start \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
-  && createuser -- rails \
-  && createdb --owner rails -- example_development \
+  && createuser rails \
+  && createdb --owner rails example_development \
   && pg_ctl stop
 
 USER root
 
 # Install gem dependencies
 COPY Gemfile* /opt/rails/
-RUN until timeout -t 180 bundle; do :; done
+RUN until timeout -t 180 bundle; do :; done \
+  && setup-directories.sh rails r /opt/rails
 
 COPY . /opt/rails
-RUN mkdir /opt/nginx \
-  && mv /opt/rails/public /opt/nginx/html \
-  && setup-directories.sh nginx r  /opt/nginx \
-  && setup-directories.sh rails r  /opt/rails \
+RUN setup-directories.sh  rails r  /opt/rails \
   && setup-directories.sh rails rw /opt/rails/log /opt/rails/tmp
 DOCKERFILE

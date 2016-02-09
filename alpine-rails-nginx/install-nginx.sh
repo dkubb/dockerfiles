@@ -2,8 +2,8 @@
 
 source strict-mode.sh
 
-NGINX_VERSION=1.9.10
-NGINX_HASH=fb14d76844cab0a5a0880768be28965e74f9956790f618c454ef6098e26631d9
+NGINX_VERSION=1.9.11
+NGINX_HASH=6a5c72f4afaf57a6db064bba0965d72335f127481c5d4e64ee8714e7b368a51f
 NGINX_HEADERS_MORE_VERSION=0.29
 NGINX_HEADERS_MORE_HASH=0a5f3003b5851373b03c542723eb5e7da44a01bf4c4c5f20b4de53f355a28d33
 
@@ -16,8 +16,7 @@ function verified_curl {
     && tar xf "$file"
 }
 
-mkdir /usr/local/src
-cd /usr/local/src
+cd "$(dirname "$0")" || exit 1
 
 verified_curl \
   "http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" \
@@ -29,10 +28,10 @@ verified_curl \
   "headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION.tar.gz" \
   "$NGINX_HEADERS_MORE_HASH"
 
-cd nginx-$NGINX_VERSION
+cd nginx-$NGINX_VERSION || exit 1
 
 # Patch nginx source
-patch --strip 0 < /tmp/nginx.patch
+patch --strip 0 < "$(dirname "$0")/nginx.patch"
 
 # Configure nginx
 ./configure \

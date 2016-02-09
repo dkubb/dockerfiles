@@ -16,7 +16,6 @@ function verified_curl {
     && tar xf "$file"
 }
 
-mkdir /usr/local/src
 cd /usr/local/src
 
 verified_curl \
@@ -32,7 +31,7 @@ verified_curl \
 cd nginx-$NGINX_VERSION
 
 # Patch nginx source
-patch --strip 0 < /tmp/nginx.patch
+patch --strip 0 < "$(dirname "$0")/nginx.patch"
 
 # Configure nginx
 ./configure \

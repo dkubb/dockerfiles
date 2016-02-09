@@ -16,7 +16,7 @@ function verified_curl {
     && tar xf "$file"
 }
 
-cd /usr/local/src
+cd "$(dirname "$0")" || exit 1
 
 verified_curl \
   "http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" \
@@ -28,7 +28,7 @@ verified_curl \
   "headers-more-nginx-module-$NGINX_HEADERS_MORE_VERSION.tar.gz" \
   "$NGINX_HEADERS_MORE_HASH"
 
-cd nginx-$NGINX_VERSION
+cd nginx-$NGINX_VERSION || exit 1
 
 # Patch nginx source
 patch --strip 0 < "$(dirname "$0")/nginx.patch"

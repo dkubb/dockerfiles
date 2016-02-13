@@ -41,23 +41,22 @@ file 'Dockerfile', <<-'DOCKERFILE'
 FROM dkubb/alpine-rails-nginx
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
-ENV RAILS_ENV=development
+ENV RAILS_ENV=development \
+  PGDATA=/var/db/postgresql/data
 
 RUN apk add postgresql-dev=9.5.0-r0 \
   && chown postgres: /usr/bin/postgres \
   && chmod 0700 /usr/bin/postgres
 
 COPY config/postgres.sh /etc/sv/postgres
-RUN export PGDATA=/var/db/postgresql/data \
-  && setup-directories.sh root     r  /etc/service/postgres \
+RUN setup-directories.sh root      r  /etc/service/postgres \
   && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
   && chmod u+x /etc/sv/postgres \
   && ln -s /etc/sv/postgres /etc/service/postgres/run
 
 # Setup database and user
 USER postgres
-RUN export PGDATA=/var/db/postgresql/data \
-  && pg_ctl initdb \
+RUN pg_ctl initdb \
   && pg_ctl start \
   && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
   && createuser rails \

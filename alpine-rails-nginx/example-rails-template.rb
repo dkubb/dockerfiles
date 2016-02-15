@@ -57,8 +57,7 @@ RUN setup-directories.sh root      r  /etc/service/postgres \
 # Setup database and user
 USER postgres
 RUN pg_ctl initdb \
-  && pg_ctl start \
-  && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
+  && pg_ctl start -w \
   && createuser rails \
   && createdb --owner rails example_development \
   && pg_ctl stop

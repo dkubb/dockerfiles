@@ -9,8 +9,7 @@ COPY etc /etc
 
 # Upgrade installed system dependencies
 COPY apk-packages /tmp/
-RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-  && sed 's/#.*$//;/^$/d' /tmp/apk-packages \
+RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
   | xargs apk add --update-cache \
   && rm /tmp/apk-packages

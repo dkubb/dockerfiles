@@ -44,7 +44,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 ENV RAILS_ENV=development \
   PGDATA=/var/db/postgresql/data
 
-RUN apk add postgresql-dev=9.5.0-r0 \
+RUN apk add postgresql-dev=9.5.1-r0 \
   && chown postgres: /usr/bin/postgres \
   && chmod 0700 /usr/bin/postgres
 
@@ -57,8 +57,7 @@ RUN setup-directories.sh root      r  /etc/service/postgres \
 # Setup database and user
 USER postgres
 RUN pg_ctl initdb \
-  && pg_ctl start \
-  && until psql --command 'SELECT 1' 2>/dev/null >&2; do :; done \
+  && pg_ctl start -w \
   && createuser rails \
   && createdb --owner rails example_development \
   && pg_ctl stop

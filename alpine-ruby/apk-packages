@@ -1,14 +1,14 @@
 # system runtime dependencies
 alpine-base         = 3.3.0-r0
 alpine-baselayout   = 2.3.2-r10
-alpine-conf         = 3.3.2-r0
+alpine-conf         = 3.3.2-r1
 apk-tools           = 2.6.6-r1
 busybox             = 1.24.1-r8
-busybox-initscripts = 2.3-r4
-busybox-suid        = 1.24.1-r8
-musl                = 1.1.14-r1
-musl-utils          = 1.1.14-r1
-openrc              = 0.20.4-r0
+busybox-initscripts = 2.3-r5
+busybox-suid        = 1.24.2-r1
+musl                = 1.1.14-r5
+musl-utils          = 1.1.14-r5
+openrc              = 0.20.5-r0
 
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3

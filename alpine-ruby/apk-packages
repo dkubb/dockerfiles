@@ -5,7 +5,7 @@ alpine-conf         = 3.3.2-r1
 apk-tools           = 2.6.6-r1
 busybox             = 1.24.1-r8
 busybox-initscripts = 2.3-r5
-busybox-suid        = 1.24.2-r1
+busybox-suid        = 1.24.2-r2
 musl                = 1.1.14-r5
 musl-utils          = 1.1.14-r5
 openrc              = 0.20.5-r0
@@ -13,7 +13,7 @@ openrc              = 0.20.5-r0
 # dockerfile build dependencies
 alpine-sdk          = 0.4-r3
 bash                = 4.3.42-r3
-curl                = 7.47.1-r0
+curl                = 7.48.0-r0
 
 # service runtime dependencies
 ruby                = 2.2.4-r0

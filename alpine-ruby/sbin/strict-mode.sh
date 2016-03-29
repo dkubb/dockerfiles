@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Reference:
 # http://www.davidpashley.com/articles/writing-robust-shell-scripts/
 # http://kvz.io/blog/2013/11/21/bash-best-practices/

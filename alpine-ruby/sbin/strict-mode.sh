@@ -8,5 +8,6 @@ set -o pipefail   # Exit when a command in a pipeline fails
 set -o nounset    # Exit when an undefined variable is used
 set -o noglob     # Disable shell globbing
 set -o noclobber  # Disable automatic file overwriting
+set -o posix      # Ensure posix semantics
 
 IFS=$'\n\t'  # Set default field separator to not split on spaces

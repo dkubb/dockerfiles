@@ -11,3 +11,5 @@ set -o noclobber  # Disable automatic file overwriting
 set -o posix      # Ensure posix semantics
 
 IFS=$'\n\t'  # Set default field separator to not split on spaces
+
+umask 0077

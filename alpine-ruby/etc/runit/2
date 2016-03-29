@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 exec runsvdir -P /etc/service

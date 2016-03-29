@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 exec chpst -u nginx nginx -c /etc/nginx/nginx.conf -g 'daemon off;'

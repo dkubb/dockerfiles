@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 # Setup acl to allow nginx and user read-only access to /opt
 setfacl --modify u:nginx:rX,u:rails:rX /opt
 

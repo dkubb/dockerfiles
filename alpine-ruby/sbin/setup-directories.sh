@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 user="$1"
 perms="$2"
 directories=("${@:3}")

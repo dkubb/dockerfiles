@@ -14,8 +14,11 @@ RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/
 COPY etc  /etc
 COPY sbin /usr/local/sbin
 
+# Enable strict mode
+ENV BASH_ENV=/usr/local/sbin/strict-mode.sh
+
 # Replace default sh command
-RUN ln -sfv /usr/local/sbin/sh-wrapper.sh /bin/sh
+RUN ln -sfv /bin/bash /bin/sh
 
 # Create system directories and service symlinks
 RUN setup-directories.sh root r /opt /etc/runit /etc/sv /etc/service \

@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 cd /opt/rails
 eval "exec chpst -u rails -- $(ruby -r yaml -e 'puts YAML.load_file("Procfile").fetch("web")')"

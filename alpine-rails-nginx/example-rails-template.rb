@@ -29,8 +29,6 @@ PROCFILE
 file 'config/postgres.sh', <<-'POSTGRES'
 #!/usr/bin/env bash
 
-source strict-mode.sh
-
 export PGDATA=/var/db/postgresql/data
 
 cd $PGDATA

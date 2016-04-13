@@ -42,7 +42,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 ENV RAILS_ENV=development \
   PGDATA=/var/db/postgresql/data
 
-RUN apk add postgresql-dev=9.5.1-r0 \
+RUN apk add postgresql-dev=9.5.2-r1 \
   && chown postgres: /usr/bin/postgres \
   && chmod 0700 /usr/bin/postgres
 

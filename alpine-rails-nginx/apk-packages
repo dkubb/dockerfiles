@@ -1,5 +1,5 @@
 # nginx build dependencies
-linux-headers = 4.1.12-r0
+linux-headers = 4.4.6-r1
 pcre-dev      = 8.38-r0
 
 # service runtime dependencies

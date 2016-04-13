@@ -29,8 +29,6 @@ PROCFILE
 file 'config/postgres.sh', <<-'POSTGRES'
 #!/usr/bin/env bash
 
-export PGDATA=/var/db/postgresql/data
-
 cd $PGDATA
 exec chpst -u postgres postgres
 POSTGRES

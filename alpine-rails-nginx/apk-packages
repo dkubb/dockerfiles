@@ -1,5 +1,5 @@
 # nginx build dependencies
-linux-headers = 4.4.6-r1
+linux-headers = 4.1.12-r0
 pcre-dev      = 8.38-r0
 
 # service runtime dependencies
@@ -7,5 +7,5 @@ acl           = 2.2.52-r2
 libffi-dev    = 3.2.1-r2
 libxml2-dev   = 2.9.3-r0
 libxslt-dev   = 1.1.28-r2
-nodejs        = 5.10.1-r0
-openssl-dev   = 1.0.2g-r3
+nodejs        = 4.3.0-r0
+openssl-dev   = 1.0.2g-r0

@@ -21,4 +21,3 @@ ruby-bigdecimal     = 2.2.4-r0
 ruby-dev            = 2.2.4-r0
 ruby-io-console     = 2.2.4-r0
 ruby-irb            = 2.2.4-r0
-runit@testing       = 2.1.2-r3

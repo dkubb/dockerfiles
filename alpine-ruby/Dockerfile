@@ -1,6 +1,6 @@
 # dkubb/alpine-ruby
 
-FROM alpine:3.3
+FROM alpine:3.4
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 # Upgrade installed system dependencies

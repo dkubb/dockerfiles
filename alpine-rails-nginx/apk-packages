@@ -7,5 +7,4 @@ acl           = 2.2.52-r2
 libffi-dev    = 3.2.1-r2
 libxml2-dev   = 2.9.4-r0
 libxslt-dev   = 1.1.29-r0
-nodejs        = 6.2.0-r0
-openssl-dev   = 1.0.2h-r1
+nodejs        = 6.7.0-r0

@@ -14,6 +14,9 @@ RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | xargs apk add --update-cache \
   && rm /tmp/apk-packages
 
+RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/community/ \
+  runit=2.1.2-r3
+
 # Create system users
 RUN adduser -DSH nginx \
   && adduser -DS rails

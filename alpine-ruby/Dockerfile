@@ -10,7 +10,8 @@ RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | xargs apk add --update-cache \
   && rm /tmp/apk-packages
 
-RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ runit=2.1.2-r3
+RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
+  libressl-dev=2.4.4-r0
 
 COPY etc  /etc
 COPY sbin /usr/local/sbin

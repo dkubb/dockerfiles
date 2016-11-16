@@ -1,4 +1,5 @@
-gem 'nokogiri', '= 1.6.7.2'
+gem 'json'
+gem 'nokogiri'
 gem 'puma'
 gem 'tzinfo-data'
 
@@ -41,7 +42,9 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 ENV RAILS_ENV=development \
   PGDATA=/var/db/postgresql/data
 
-RUN apk add --update-cache postgresql-dev=9.5.3-r1 postgresql=9.5.3-r1 \
+RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
+  postgresql-dev=9.6.0-r1 \
+  postgresql=9.6.0-r1 \
   && chown postgres: /usr/bin/postgres \
   && chmod 0700 /usr/bin/postgres
 

@@ -26,8 +26,8 @@ RUN setup-directories.sh root r /opt /etc/runit /etc/sv /etc/service \
 # Upgrade rubygems and bundler
 RUN echo 'gem: --no-document' > ~/.gemrc \
   && umask 0022 \
-  && gem update --system \
-  && gem install bundler
+  && gem update --system 2.6.12 \
+  && gem install bundler --version 1.15.0
 
 # Setup bundler for the root user
 RUN bundle config --global build.nokogiri '--use-system-libraries' \

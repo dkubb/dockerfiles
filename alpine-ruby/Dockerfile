@@ -1,6 +1,6 @@
 # dkubb/alpine-ruby
 
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER Dan Kubb <dkubb@fastmail.com>
 
 # Upgrade installed system dependencies
@@ -9,9 +9,6 @@ RUN sed 's/#.*$//;/^$/d' /tmp/apk-packages \
   | tr -d ' ' \
   | xargs apk add --update-cache \
   && rm /tmp/apk-packages
-
-RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
-  libressl-dev=2.4.4-r0
 
 COPY etc  /etc
 COPY sbin /usr/local/sbin
@@ -29,8 +26,8 @@ RUN setup-directories.sh root r /opt /etc/runit /etc/sv /etc/service \
 # Upgrade rubygems and bundler
 RUN echo 'gem: --no-document' > ~/.gemrc \
   && umask 0022 \
-  && gem update --system \
-  && gem install bundler
+  && gem update --system 2.6.12 \
+  && gem install bundler --version 1.15.0
 
 # Setup bundler for the root user
 RUN bundle config --global build.nokogiri '--use-system-libraries' \

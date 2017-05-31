@@ -1,15 +1,22 @@
 --- src/http/ngx_http_special_response.c
 +++ src/http/ngx_http_special_response.c
-@@ -19,14 +19,12 @@
-
-
+@@ -19,21 +19,18 @@
+ 
+ 
  static u_char ngx_http_error_full_tail[] =
 -"<hr><center>" NGINX_VER "</center>" CRLF
  "</body>" CRLF
  "</html>" CRLF
  ;
-
-
+ 
+ 
+ static u_char ngx_http_error_build_tail[] =
+-"<hr><center>" NGINX_VER_BUILD "</center>" CRLF
+ "</body>" CRLF
+ "</html>" CRLF
+ ;
+ 
+ 
  static u_char ngx_http_error_tail[] =
 -"<hr><center>nginx</center>" CRLF
  "</body>" CRLF

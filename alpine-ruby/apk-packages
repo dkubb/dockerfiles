@@ -1,24 +1,24 @@
 # system runtime dependencies
-alpine-base         = 3.5.2-r0
+alpine-base         = 3.6.0-r0
 alpine-baselayout   = 3.0.4-r0
-alpine-conf         = 3.5.0-r2
-apk-tools           = 2.6.8-r2
-busybox             = 1.25.1-r0
-busybox-initscripts = 3.0-r8
-busybox-suid        = 1.25.1-r0
-musl                = 1.1.15-r6
-musl-utils          = 1.1.15-r6
-openrc              = 0.21.7-r4
+alpine-conf         = 3.6.0_rc2-r0
+apk-tools           = 2.7.1-r0
+busybox             = 1.26.2-r4
+busybox-initscripts = 3.1-r1
+busybox-suid        = 1.26.2-r4
+musl                = 1.1.16-r9
+musl-utils          = 1.1.16-r9
+openrc              = 0.24.1-r2
 
 # dockerfile build dependencies
 alpine-sdk          = 0.5-r0
-bash                = 4.3.46-r5
-curl                = 7.52.1-r3
+bash                = 4.3.48-r1
+curl                = 7.54.0-r0
 
 # service runtime dependencies
-libressl-dev        = 2.4.4-r0
-ruby                = 2.3.3-r0
-ruby-bigdecimal     = 2.3.3-r0
-ruby-dev            = 2.3.3-r0
-ruby-io-console     = 2.3.3-r0
-ruby-irb            = 2.3.3-r0
+libressl-dev        = 2.5.4-r0
+ruby                = 2.4.1-r3
+ruby-bigdecimal     = 2.4.1-r3
+ruby-dev            = 2.4.1-r3
+ruby-io-console     = 2.4.1-r3
+ruby-irb            = 2.4.1-r3

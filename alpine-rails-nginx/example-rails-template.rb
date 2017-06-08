@@ -43,20 +43,21 @@ ENV RAILS_ENV=development \
   PGDATA=/var/db/postgresql/data
 
 RUN apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main/ \
-  postgresql-dev=9.6.0-r1 \
-  postgresql=9.6.0-r1 \
+  postgresql-dev=9.6.3-r0 \
+  postgresql=9.6.3-r0 \
   && chown postgres: /usr/bin/postgres \
   && chmod 0700 /usr/bin/postgres
 
 COPY config/postgres.sh /etc/sv/postgres
 RUN setup-directories.sh root      r  /etc/service/postgres \
-  && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" \
+  && setup-directories.sh postgres rw "$(dirname "$PGDATA")" "$PGDATA" /run/postgresql \
   && chmod u+x /etc/sv/postgres \
   && ln -s /etc/sv/postgres /etc/service/postgres/run
 
 # Setup database and user
 USER postgres
-RUN pg_ctl initdb \
+
+RUN pg_ctl initdb -o '--auth-host=reject --auth-local=trust --encoding=UTF-8 --no-locale' \
   && pg_ctl start -w \
   && createuser rails \
   && createdb --owner rails example_development \

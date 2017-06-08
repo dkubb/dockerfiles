@@ -1,5 +1,5 @@
 # system runtime dependencies
-alpine-base         = 3.6.0-r0
+alpine-base         = 3.6.1-r0
 alpine-baselayout   = 3.0.4-r0
 alpine-conf         = 3.6.0_rc2-r0
 apk-tools           = 2.7.1-r0

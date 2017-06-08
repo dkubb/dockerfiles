@@ -11,6 +11,7 @@ readonly IMAGES=(
 (
   cd alpine-rails-nginx \
     && gem install rails --version '~> 4.2' \
+    && rm -rf example \
     && rails new example --template example-rails-template.rb --database postgresql --force
 )
 

@@ -56,7 +56,8 @@ RUN setup-directories.sh root      r  /etc/service/postgres \
 
 # Setup database and user
 USER postgres
-RUN pg_ctl initdb \
+
+RUN pg_ctl initdb -o '--auth-host=reject --auth-local=trust --encoding=UTF-8 --no-locale' \
   && pg_ctl start -w \
   && createuser rails \
   && createdb --owner rails example_development \

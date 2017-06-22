@@ -3,6 +3,7 @@
 source alpine-ruby/sbin/strict-mode.sh
 
 readonly IMAGES=(
+  alpine-aws
   alpine-ruby
   alpine-rails-nginx
   alpine-rails-nginx/example

@@ -7,7 +7,7 @@ MAINTAINER Dan Kubb <dkubb@fastmail.com>
 RUN apk upgrade --update-cache --available
 
 # Install system dependencies
-RUN apk add --update-cache py2-pip=9.0.1-r1
+RUN apk add py2-pip=9.0.1-r1
 
 # Install aws cli
 RUN umask 022 && pip install awscli==1.11.109
